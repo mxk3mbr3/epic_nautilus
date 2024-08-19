@@ -1,0 +1,3 @@
+dremio-client==<version>
+dbt-core==<version>
+dbt-postgres==<version>  # Or dbt-snowflake, dbt-bigquery, etc.

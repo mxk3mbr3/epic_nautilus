@@ -2704,6 +2704,11 @@ dags:
     #   cpu: 100m
     #   memory: 128Mi
 
+  # For requirements.txt
+  installRequirements: true
+  requirements:
+    path: "airflow/requirements.txt"
+
 logs:
   # Configuration for empty dir volume (if logs.persistence.enabled == false)
   # emptyDirConfig:

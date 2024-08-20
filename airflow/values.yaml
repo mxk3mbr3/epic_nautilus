@@ -65,10 +65,10 @@ containerLifecycleHooks: {}
 airflowHome: /opt/airflow
 
 # Default airflow repository -- overridden by all the specific images below
-defaultAirflowRepository: apache/airflow
+defaultAirflowRepository: airflow-custom-nautilus
 
 # Default airflow tag to deploy
-defaultAirflowTag: "2.9.3"
+defaultAirflowTag: "1.0.0"
 
 # Default airflow digest. If specified, it takes precedence over tag
 defaultAirflowDigest: ~
@@ -2703,11 +2703,6 @@ dags:
     #  requests:
     #   cpu: 100m
     #   memory: 128Mi
-
-  # For requirements.txt
-  installRequirements: true
-  requirements:
-    path: "airflow/requirements.txt"
 
 logs:
   # Configuration for empty dir volume (if logs.persistence.enabled == false)

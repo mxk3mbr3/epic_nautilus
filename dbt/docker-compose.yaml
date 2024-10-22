@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  minio:
+    image: minio/minio
+    container_name: minio
+    hostname: minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    command: server /data --console-address ":9001"
+    volumes:
+      - minio-data:/data
+    networks:
+      - dremio_network
+
+  dremio:
+    image: dremio/dremio-oss
+    container_name: dremio
+    ports:
+      - "9047:9047"
+      - "31010:31010"
+      - "45678:45678"
+    environment:
+      DREMIO_JAVA_SERVER_HEAP_MAX: 4G
+      DREMIO_JAVA_SERVER_HEAP_MIN: 4G
+      DREMIO_S3_ENDPOINT: http://minio:9000
+    volumes:
+      - dremio-data:/opt/dremio/data
+    depends_on:
+      - minio
+    networks:
+      - dremio_network
+
+networks:
+  dremio_network:
+
+volumes:
+  minio-data:
+  dremio-data:

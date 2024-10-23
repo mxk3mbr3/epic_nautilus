@@ -39,7 +39,7 @@ class PowerBIDataflowRefreshOperator(BaseOperator):
         access_token = response.json().get('access_token')
 
         # Step 4: Refresh the dataflow
-        refresh_url = f"https://api.powerbi.com/v1.0/myorg/groups/{self.group_id}/dataflows/{self.dataflow_id}/refresh"
+        refresh_url = f"https://api.powerbi.com/v1.0/myorg/groups/{self.group_id}/dataflows/{self.dataflow_id}/refreshes"
         headers = {'Authorization': f'Bearer {access_token}'}
         refresh_response = requests.post(refresh_url, headers=headers)
         refresh_response.raise_for_status()

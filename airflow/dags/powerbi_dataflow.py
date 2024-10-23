@@ -5,6 +5,7 @@ from airflow.utils.decorators import apply_defaults
 from airflow.hooks.base_hook import BaseHook
 
 from airflow import DAG
+from datetime import datetime
 from airflow.utils.dates import days_ago
 
 # Define Class PowerBIDataflowRefreshOperator

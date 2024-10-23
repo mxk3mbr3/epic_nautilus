@@ -1,4 +1,3 @@
-import json
 import requests
 from airflow.models import BaseOperator
 from airflow.utils.decorators import apply_defaults
@@ -25,7 +24,7 @@ class PowerBIDataflowRefreshOperator(BaseOperator):
         # Step 2: Extract credentials from connection
         client_id = connection.login
         client_secret = connection.password
-        tenant_id = json.loads(connection.extra_dejson).get('tenantId')
+        tenant_id = connection.extra_dejson.get('tenantId')  # No need to load JSON
 
         # Step 3: Get the Azure AD token
         url = f"https://login.microsoftonline.com/{tenant_id}/oauth2/v2.0/token"
@@ -60,7 +59,7 @@ with DAG(
     refresh_dataflow_test = PowerBIDataflowRefreshOperator(
         task_id="refresh_dataflow_test",
         powerbi_conn_id="powerbi_conn",
-        dataflow_id="0491fd0d-175d-43ba-8a4c-7090bae49ceb",
+        dataflow_id="e1ea643c-3160-49b9-a5b8-a3718162dd43",
         group_id="d01c785c-61ea-4acf-8fe6-21dd97af0112"
     )
 
